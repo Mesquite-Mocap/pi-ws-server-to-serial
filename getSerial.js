@@ -1,6 +1,8 @@
+/*This gets the serial information to be used*/
+
 var SerialPort = require('serialport');
-var port = new SerialPort('/dev/ttyGS0', {
-   baudRate: 115200,
+var port = new SerialPort('/dev/ttyGS0', { //change your serial port 
+   baudRate: 115200, //this is the same as the baudrate as your watch 
    dataBits: 8,
    parity: 'none',
    stopBits: 1,
