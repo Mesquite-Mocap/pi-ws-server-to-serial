@@ -11,7 +11,7 @@ var port = new SerialPort('/dev/ttyGS0', { //update your port
 
 
 function write(str){
-	port.write(str + '\n',function(err){
+	port.write(str + '\n',function(err){ // the string being pushed 
 		if(err){
 			console.log("e");
 		}
