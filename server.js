@@ -42,7 +42,7 @@ const url = require('url');
 
 const wss1 = new WebSocket.Server({ noServer: true });
 const wss2 = new WebSocket.Server({ noServer: true });
-const port = 3000;
+const p = 3000;
 
 var mac2Bones = {
   "08:3A:F2:44:C8:34" : {id: "LeftArm", calibration:{x:0, y:0, z:0, w:1}, last:{x:0, y:0, z:0, w:1}, global:{x:null, y:null, z:null, w:null}},
@@ -223,6 +223,6 @@ server.on('upgrade', function upgrade(request, socket, head) {
   }
 });
 
-server.listen(port, () => {
-	  console.log(`App listening at http://localhost:${port}`)
+server.listen(p, () => {
+	  console.log(`App listening at http://localhost:${p}`)
 })
