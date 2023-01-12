@@ -75,8 +75,8 @@ var mac2Bones = {
 wss1.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
 	// console.log(message.toString());
-    wss2.clients.forEach(function each(client) {
-      if (client.readyState === WebSocket.OPEN) {
+    // wss2.clients.forEach(function each(client) {
+      // if (client.readyState === WebSocket.OPEN) {
         if(message == "Connected") {
           return;
         }
@@ -193,9 +193,9 @@ wss1.on('connection', function connection(ws) {
 
        console.log('received wss2: %s', msg);
 
-        client.send(msg);
-      }
-    });
+        // client.send(msg);
+      // }
+    // });
   });
 });
 
