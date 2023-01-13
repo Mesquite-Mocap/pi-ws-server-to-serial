@@ -141,7 +141,7 @@ wss1.on('connection', function connection(ws) {
         }
         msg += "  ";
 
-        if(mac2Bones[obj.id].id=="Spine") {
+        if(mac2Bones[obj.id].id=="Hips") {
           msg += "~~spine~qW:" + obj.w + "~qX:" + obj.x + "~qY:" + obj.y + "~qZ:" + obj.z + "~";
         } else {
           msg += "~~spine~qW:0.0000~qX:-0.0000~qY:-0.0000~qZ:0.0000~";
