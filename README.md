@@ -19,3 +19,15 @@ To finish the [Raspberry Pi Zero](https://www.raspberrypi.com/products/raspberry
 2. package-lock.json: Necessary Library info 
 3. server.js: The server running on Pi
 4. /node-modules/: the libraries for node.js 
+
+### Dependencies
+
+```sh
+sudo apt-get update
+sudo apt-get remove python3
+sudo apt-get install nodejs npm python2.7
+sudo npm install n
+sudo n install 6
+sudo npm install serialport
+
+```
