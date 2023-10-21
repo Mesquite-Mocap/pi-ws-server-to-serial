@@ -32,8 +32,9 @@ sudo apt install nodejs npm git
 a. Run  
 ```sh
 sudo apt-get remove python3
+sudo apt-get update
 sudo apt-get install python2.7
-sudo npm install n
+sudo npm install -g n
 sudo n install 6
 sudo npm install serialport
 
