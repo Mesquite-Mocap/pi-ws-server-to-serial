@@ -39,7 +39,7 @@ wss1.on('connection', function connection(ws) {
        // }
 
        //console.log('received wss2: %s', msg);
-       write(msg);
+       write(message.toString());
 
         // client.send(msg);
       // }
