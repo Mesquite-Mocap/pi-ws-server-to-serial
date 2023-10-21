@@ -8,10 +8,10 @@ First, you need to copy this code into your terminal to install node.js and othe
 (Flash a terminal only image of raspberry pi using [Pi OS Imager](https://www.raspberrypi.com/software/)).
 
 
-‘’’
+```
 sudo apt update
 sudo apt install nodejs npm git
-‘’’
+```
 
 ### Dependencies
 
