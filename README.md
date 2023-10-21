@@ -12,7 +12,7 @@ Get a
 
 a. Flash a **terminal only** image of raspberry pi using [Pi OS Imager](https://www.raspberrypi.com/software/):
 
-<img src="rpiopts.png" width=400 style="display:block;margin:auto">
+<img src="rpiopts.jpg" width=400 style="display:block;margin:auto">
 
 
 b. Ssh into pi from a bash shell
