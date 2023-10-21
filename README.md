@@ -29,7 +29,7 @@ sudo apt install nodejs npm git
 
 ### STEP 2: Install More Dependencies
 
-1. Run  
+a. Run  
 ```sh
 sudo apt-get update
 sudo apt-get remove python3
@@ -42,18 +42,18 @@ sudo npm install serialport
 in the rpi shell.
 
 
-2. Make sure **serial interface** and **auto-logon for root user** are enabled (use `sudo rapsi-config`)
+b. Make sure **serial interface** and **auto-logon for root user** are enabled (use `sudo rapsi-config`)
 
 
 
-3. Add 
+c. Add 
 ```
 dtoverlay=dwc2
 ```
 to `/boot/config.txt`.
 
 
-4. Add 
+d. Add 
 
 ```
 dwc2
