@@ -1,5 +1,5 @@
 
-## Raspberry Pi Zero W Dongle Configuration
+## Raspberry Pi Zero W Dongle Configuration for Mesquite Mocap
 
 ### Installing node.js and other necessary software on raspberry pi
 
