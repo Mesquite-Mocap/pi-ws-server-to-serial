@@ -15,6 +15,7 @@ sudo apt install nodejs npm git
 
 ### Dependencies
 
+- Install 
 ```sh
 sudo apt-get update
 sudo apt-get remove python3
@@ -25,16 +26,16 @@ sudo npm install serialport
 
 ```
 
-Make sure serial interface and auto-logon are enabled (use `sudo rapsi-config`)
+- Make sure serial interface and auto-logon are enabled (use `sudo rapsi-config`)
 
 
-Add 
+- Add 
 ```
 dtoverlay=dwc2
 ```
  to `/boot/config.txt`.
 
-Add 
+- Add 
 
 ```
 dwc2
