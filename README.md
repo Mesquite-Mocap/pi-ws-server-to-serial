@@ -68,6 +68,7 @@ To finish the Pi setup, we will put the `pi-ws-server-to-serial` onto your pi. T
 ```sh
 git clone https://github.com/Mesquite-Mocap/pi-ws-server-to-serial.git
 cd pi-ws-server-to-serial
+sudo chmod -R 777 /root/
 sudo npm install serialport ws
 ```
 
