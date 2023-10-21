@@ -23,25 +23,29 @@ ssh mesquite@mm.local
 c. Then install node.js and other dependencies for your system: 
 
 ```
-sudo apt update
-sudo apt install nodejs npm git
+sudo apt-get update
+sudo apt-get install nodejs npm git software-properties-common
 ```
 
 ### STEP 2: Install More Dependencies
 
 a. Run  
 ```sh
-sudo apt-get remove python3
+sudo apt-get install --reinstall ca-certificates
+sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt-get update
 sudo apt-get install python2.7
+sudo ln -s /usr/bin/python2.7 /usr/bin/python
+
 sudo npm install n
 sudo n install 6
+hash -r
 
 ```
 in the rpi shell.
 
 
-b. Make sure **serial interface** and **auto-logon for root user** are enabled (use `sudo rapsi-config`)
+b. Make sure **serial interface** and **auto-logon for root user** are enabled (use `sudo rapsi-config`; restart to apply settings)
 
 
 
@@ -69,7 +73,9 @@ To finish the Pi setup, we will put the `pi-ws-server-to-serial` onto your pi. T
 git clone https://github.com/Mesquite-Mocap/pi-ws-server-to-serial.git
 cd pi-ws-server-to-serial
 sudo chmod -R 777 /root/
-sudo npm install serialport ws
+sudo chmod 777 -R .
+sudo npm install serialport
+sudo npm install ws
 ```
 
 To start the server on boot you will need to add
