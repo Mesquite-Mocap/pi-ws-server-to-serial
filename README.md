@@ -34,9 +34,8 @@ a. Run
 sudo apt-get remove python3
 sudo apt-get update
 sudo apt-get install python2.7
-sudo npm install -g n
+sudo npm install n
 sudo n install 6
-sudo npm install serialport
 
 ```
 in the rpi shell.
@@ -68,6 +67,8 @@ To finish the Pi setup, we will put the `pi-ws-server-to-serial` onto your pi. T
 
 ```
 git clone https://github.com/Mesquite-Mocap/pi-ws-server-to-serial.git
+cd pi-ws-server-to-serial
+sudo npm install serialport ws
 ```
 
 To start the server on boot you will need to add
