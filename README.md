@@ -81,6 +81,7 @@ sudo npm install ws
 To start the server on boot you will need to add
 
 ```sh
+cd pi-ws-server-to-serial
 sudo node server.js
 
 ```
