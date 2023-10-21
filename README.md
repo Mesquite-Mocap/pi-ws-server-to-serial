@@ -10,12 +10,17 @@ Get a
 
 ### STEP 1: Installing Node.js and other necessary software on Pi Zero W
 
-Flash a **terminal only** image of raspberry pi using [Pi OS Imager](https://www.raspberrypi.com/software/):
+a. Flash a **terminal only** image of raspberry pi using [Pi OS Imager](https://www.raspberrypi.com/software/):
 
 <img src="rpiopts.png" width=400 style="display:block;margin:auto">
 
 
-Then install node.js and other dependencies for your system: 
+b. Ssh into pi from a bash shell
+```
+ssh mesquite@mm.local 
+```
+
+c. Then install node.js and other dependencies for your system: 
 
 ```
 sudo apt update
