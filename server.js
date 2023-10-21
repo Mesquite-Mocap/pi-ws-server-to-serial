@@ -20,8 +20,6 @@ function write(str){
 
 const WebSocket = require('ws')
 
-
-
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
@@ -29,7 +27,7 @@ const url = require('url');
 
 const wss1 = new WebSocket.Server({ noServer: true });
 const wss2 = new WebSocket.Server({ noServer: true });
-const p = 3000;
+const p = 80;
 
 wss1.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
@@ -40,7 +38,7 @@ wss1.on('connection', function connection(ws) {
        //   return;
        // }
 
-       console.log('received wss2: %s', msg);
+       //console.log('received wss2: %s', msg);
        write(msg);
 
         // client.send(msg);
@@ -61,8 +59,10 @@ server.on('upgrade', function upgrade(request, socket, head) {
   const pathname = url.parse(request.url).pathname;
 
   if (pathname === '/hub') {
+    
     wss1.handleUpgrade(request, socket, head, function done(ws) {
       wss1.emit('connection', ws, request);
+          // print out the message
     });
   } else if (pathname === '/web_client') {
     wss2.handleUpgrade(request, socket, head, function done(ws) {
