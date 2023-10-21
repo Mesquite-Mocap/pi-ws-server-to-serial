@@ -7,12 +7,14 @@ Get a
 - [Raspberry Pi Zero](https://www.raspberrypi.com/products/raspberry-pi-zero/) (henceforth shortened as Pi Zero, Pi or rpi), and 
 - a SD card (2gb should work, atleast 8gb recommended). Use these recommended options (will allow you to ssh intpo Pi to configure it):
 
-<img src=rpiopts.png width=400>
-
 
 ### STEP 1: Installing Node.js and other necessary software on Pi Zero W
 
-(Flash a **terminal only** image of raspberry pi using [Pi OS Imager](https://www.raspberrypi.com/software/)), Then install node.js and other dependencies for your system: 
+Flash a **terminal only** image of raspberry pi using [Pi OS Imager](https://www.raspberrypi.com/software/):
+<img src=rpiopts.png width=400>
+
+
+Then install node.js and other dependencies for your system: 
 
 ```
 sudo apt update
