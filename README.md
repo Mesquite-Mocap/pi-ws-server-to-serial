@@ -65,7 +65,7 @@ to `/etc/modules`
 
 To finish the Pi setup, we will put the `pi-ws-server-to-serial` onto your pi. This takes the streamed data from the Seeds and  converts it to serial data. This makes it much easier to aggregate the data onto any computer plugged into the pi. Go to the terminal on your Raspberry Pi and clone this repo:
 
-```
+```sh
 git clone https://github.com/Mesquite-Mocap/pi-ws-server-to-serial.git
 cd pi-ws-server-to-serial
 sudo npm install serialport ws
@@ -74,7 +74,6 @@ sudo npm install serialport ws
 To start the server on boot you will need to add
 
 ```sh
-cd /home/pi/pi-ws-server-to-serial
 sudo node server.js
 
 ```
