@@ -10,7 +10,7 @@ Get a
 
 ### STEP 1: Installing Node.js and other necessary software on Pi Zero W
 
-a. Flash a **terminal only** image of raspberry pi using [Pi OS Imager](https://www.raspberrypi.com/software/):
+a. Flash a **terminal only** image of raspberry pi using [Pi OS Imager](https://www.raspberrypi.com/software/) (this guide is for bullsye 32 bit lite):
 
 <img src="rpiopts.jpg" width=400 style="display:block;margin:auto">
 
@@ -37,7 +37,7 @@ sudo apt-get update
 sudo apt-get install python2.7
 sudo ln -s /usr/bin/python2.7 /usr/bin/python
 
-sudo npm install n
+sudo npm install -g n
 sudo n install 6
 hash -r
 
