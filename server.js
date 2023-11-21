@@ -64,6 +64,8 @@ server.on('upgrade', function upgrade(request, socket, head) {
 // static files
 app.use(express.static('public'));
 
-server.listen(p, () => {
+// listen at 0.0.0.0
+
+server.listen(p, "0.0.0.0", () => {
 	  console.log(`App listening at http://localhost:${p}`)
 })
