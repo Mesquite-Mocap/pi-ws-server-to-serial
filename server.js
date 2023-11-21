@@ -31,19 +31,7 @@ const p = 80;
 
 wss1.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
-	// console.log(message.toString());
-    // wss2.clients.forEach(function each(client) {
-      // if (client.readyState === WebSocket.OPEN) {
-       // if(message == "Connected") {
-       //   return;
-       // }
-
-       //console.log('received wss2: %s', msg);
        write(message.toString());
-
-        // client.send(msg);
-      // }
-    // });
   });
 });
 
@@ -72,6 +60,9 @@ server.on('upgrade', function upgrade(request, socket, head) {
     socket.destroy();
   }
 });
+
+// static files
+app.use(express.static('public'));
 
 server.listen(p, () => {
 	  console.log(`App listening at http://localhost:${p}`)

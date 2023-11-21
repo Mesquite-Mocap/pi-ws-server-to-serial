@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+  <meta name='mobile-web-app-capable' content='yes'>
+  <meta name='apple-mobile-web-app-capable' content='yes'>
+  <script src="quaternion.min.js"></script>
+  <script src='plotly-2.27.0.min.js'></script>
+  <script src='d3.min.js'></script>
+  <style>
+    .cube {
+      width: 40px;
+      height: 40px;
+      position: fixed;
+      transform-style: preserve-3d;
+      transform: translateZ(-20px);
+      right: 45px;
+      margin-top: -70px;
+    }
+
+    .cube.show-front {
+      transform: translateZ(-20px) rotateY(0deg);
+    }
+
+    .cube.show-right {
+      transform: translateZ(-20px) rotateY(-90deg);
+    }
+
+    .cube.show-back {
+      transform: translateZ(-20px) rotateY(-180deg);
+    }
+
+    .cube.show-left {
+      transform: translateZ(-20px) rotateY(90deg);
+    }
+
+    .cube.show-top {
+      transform: translateZ(-20px) rotateX(-90deg);
+    }
+
+    .cube.show-bottom {
+      transform: translateZ(-20px) rotateX(90deg);
+    }
+
+    .cube__face {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 0px solid black;
+      line-height: 200px;
+      font-size: 0px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+    }
+
+    .cube__face--front {
+      background: hsla(0, 100%, 50%, 0.7);
+    }
+
+    .cube__face--right {
+      background: hsla(60, 100%, 50%, 0.7);
+    }
+
+    .cube__face--back {
+      background: hsla(120, 100%, 50%, 0.7);
+    }
+
+    .cube__face--left {
+      background: hsla(180, 100%, 50%, 0.7);
+    }
+
+    .cube__face--top {
+      background: hsla(240, 100%, 50%, 0.7);
+    }
+
+    .cube__face--bottom {
+      background: hsla(300, 100%, 50%, 0.7);
+    }
+
+    .cube__face--front {
+      transform: rotateY(0deg) translateZ(20px);
+    }
+
+    .cube__face--right {
+      transform: rotateY(90deg) translateZ(20px);
+    }
+
+    .cube__face--back {
+      transform: rotateY(180deg) translateZ(20px);
+    }
+
+    .cube__face--left {
+      transform: rotateY(-90deg) translateZ(20px);
+    }
+
+    .cube__face--top {
+      transform: rotateX(90deg) translateZ(20px);
+    }
+
+    .cube__face--bottom {
+      transform: rotateX(-90deg) translateZ(20px);
+    }
+
+    button {
+      font-size: 30px;
+      padding: 10px;
+      position: fixed;
+      right: 5px;
+      top: 5px;
+    }
+  </style>
+  <title>WebXR SLAM</title>
+</head>
+
+<body style="margin:0;background: black; font-family:Arial, Helvetica, sans-serif">
+  <div id="overlay" style="background-color: black;color:white; text-shadow: 0px 0px 2px black;">
+    <header>
+      <h1>WebXR SLAM</h1>
+      <button id="xr-button" class="barebones-button" disabled>XR not found</button>
+
+      <div id="inAR" style="display: none;">
+        <div id="pose"></div>
+        <div id='cube' class="cube">
+          <div class="cube__face cube__face--front">front</div>
+          <div class="cube__face cube__face--back">back</div>
+          <div class="cube__face cube__face--right">right</div>
+          <div class="cube__face cube__face--left">left</div>
+          <div class="cube__face cube__face--top">top</div>
+          <div class="cube__face cube__face--bottom">bottom</div>
+        </div>
+        <p id="details"></p>
+
+        <div id="plot" style="width: 100vw; height: 80vh; background-color: white;filter:invert(1)"></div>
+      </div>
+      <div id="warning-zone"></div>
+    </header>
+  </div>
+  <script>
+    var thePlot;
+  </script>
+  <script type="module">
+    // XR globals.
+    let xrButton = document.getElementById('xr-button');
+    let xrSession = null;
+    let xrRefSpace = null;
+
+    // WebGL scene globals.
+    let gl = null;
+
+    function checkSupportedState() {
+      navigator.xr.isSessionSupported('immersive-ar').then((supported) => {
+        if (supported) {
+          xrButton.innerHTML = 'Start';
+        } else {
+          xrButton.innerHTML = 'AR not found';
+        }
+
+        xrButton.disabled = !supported;
+      });
+    }
+
+    function initXR() {
+      if (!window.isSecureContext) {
+        let message = "WebXR unavailable due to insecure context";
+        document.getElementById("warning-zone").innerText = message;
+      }
+
+      if (navigator.xr) {
+        // if touch screen, use touchstart
+        //if('ontouchstart' in window) {
+        //  xrButton.addEventListener('touchstart', onButtonClicked);
+        //} else {
+        xrButton.addEventListener('click', onButtonClicked);
+        //}
+        navigator.xr.addEventListener('devicechange', checkSupportedState);
+        checkSupportedState();
+      }
+    }
+
+    function initPlot() {
+      document.getElementById('inAR').style.display = 'block';
+      thePlot = Plotly.newPlot('plot', [
+        {
+          type: 'scatter3d',
+          mode: 'lines+markers',
+          x: [0],
+          y: [0],
+          z: [0],
+          line: {
+            width: 1,
+            color: 'black',
+            colorscale: "Viridis"
+          },
+          marker: {
+            size: 1,
+            color: 'black',
+            colorscale: "Greens",
+            cmin: -20,
+            cmax: 50
+          }
+        },
+        {
+          type: 'scatter3d',
+          mode: 'lines+markers',
+          x: [0],
+          y: [0],
+          z: [0],
+          line: { color: 'red', width: 1 },
+          marker: { color: 'red', size: 5 }
+        }],
+        {
+          autosize: false,
+          showlegend: false,
+          // hide axes 
+
+          width: window.innerWidth,
+          margin: {
+            l: 0,
+            r: 0,
+            b: 0,
+            t: 0,
+            pad: 4
+          },
+          scene: {
+            aspectmode: "manual",
+            aspectratio: {
+              x: 1, y: 0.7, z: 1,
+            },
+            xaxis: {
+              showgrid: true,
+              zeroline: true,
+              showline: false,
+              mirror: 'ticks',
+              gridcolor: '#bdbdbd',
+              gridwidth: 2,
+              zerolinecolor: '#969696',
+              zerolinewidth: 4,
+              linecolor: '#636363',
+              linewidth: 2,
+              nticks: 20,
+              range: [-10, 10],
+            },
+            yaxis: {
+              showgrid: true,
+              zeroline: true,
+              showline: true,
+              mirror: 'ticks',
+              gridcolor: '#bdbdbd',
+              gridwidth: 2,
+              zerolinecolor: '#969696',
+              zerolinewidth: 4,
+              linecolor: '#636363',
+              linewidth: 2,
+              nticks: 20,
+              range: [-10, 10],
+            },
+            zaxis: {
+              showgrid: true,
+              zeroline: true,
+              showline: true,
+              mirror: 'ticks',
+              gridcolor: '#bdbdbd',
+              gridwidth: 2,
+              zerolinecolor: '#969696',
+              zerolinewidth: 4,
+              linecolor: '#636363',
+              linewidth: 2,
+              nticks: 20,
+              visible: false,
+              range: [-10, 10],
+            }
+          }
+        }
+      );
+    }
+
+    function onButtonClicked() {
+      if (!xrSession) {
+        navigator.xr.requestSession('immersive-ar', {
+          optionalFeatures: ['dom-overlay'],
+          domOverlay: { root: document.getElementById('overlay') }
+        }).then(onSessionStarted, onRequestSessionError);
+        document.getElementById('inAR').style.display = 'block';
+        initPlot();
+      } else {
+        xrSession.end();
+        document.getElementById('inAR').style.display = 'none';
+      }
+    }
+
+    function onSessionStarted(session) {
+      xrSession = session;
+      xrButton.innerHTML = 'Stop';
+
+      // Show which type of DOM Overlay got enabled (if any)
+      if (session.domOverlayState) {
+      }
+
+      session.addEventListener('end', onSessionEnded);
+
+      let canvas = document.createElement('canvas');
+      gl = canvas.getContext('webgl', {
+        xrCompatible: true
+      });
+      session.updateRenderState({ baseLayer: new XRWebGLLayer(session, gl) });
+      session.requestReferenceSpace('local').then((refSpace) => {
+        xrRefSpace = refSpace;
+        session.requestAnimationFrame(onXRFrame);
+      });
+    }
+
+    function onRequestSessionError(ex) {
+      alert("Failed to start immersive AR session.");
+      console.error(ex.message);
+    }
+
+    function onEndSession(session) {
+      session.end();
+    }
+
+    function onSessionEnded(event) {
+      xrSession = null;
+      xrButton.innerHTML = 'Start';
+      gl = null;
+      window.location.reload();
+    }
+
+    function onXRFrame(t, frame) {
+      let session = frame.session;
+      session.requestAnimationFrame(onXRFrame);
+
+      gl.bindFramebuffer(gl.FRAMEBUFFER, session.renderState.baseLayer.framebuffer);
+
+      // Update the clear color so that we can observe the color in the
+      // headset changing over time. Use a scissor rectangle to keep the AR
+      // scene visible.
+      const width = session.renderState.baseLayer.framebufferWidth;
+      const height = session.renderState.baseLayer.framebufferHeight;
+      gl.enable(gl.SCISSOR_TEST);
+      gl.scissor(0, 0, width, height);
+
+      //  black bg
+      gl.clearColor(0, 0, 0, 1);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      // let time = Date.now();
+      // gl.clearColor(Math.cos(time / 2000), Math.cos(time / 4000), Math.cos(time / 6000), 0.5);
+      // gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+      let pose = frame.getViewerPose(xrRefSpace);
+      if (pose) {
+        const p = pose.transform.position;
+        const q = pose.transform.orientation;
+        updatePose(p, q);
+
+      } else {
+        document.getElementById('pose').innerHTML = "<p style='color:red'>No pose</p><br><br>";
+      }
+    }
+
+    function updatePose(p, q) {
+      document.getElementById('pose').innerHTML = "Position: <br>" +
+        p.x.toFixed(3) + ", " + p.y.toFixed(3) + ", " + p.z.toFixed(3) + "<br> " +
+        "Orientation: <br>" + q.x.toFixed(3) + ", " + q.y.toFixed(3) + ", " + q.z.toFixed(3) + ", " + q.w.toFixed(3);
+      var q1 = new Quaternion(q.w, q.x, q.y, q.z);
+      document.getElementById("cube").style.transform = 'translateZ(-100px) matrix3d(' + q1.toMatrix4() + ')';
+
+      // append data
+
+      Plotly.extendTraces('plot', {
+        x: [[p.x.toFixed(1)]],
+        y: [[p.y.toFixed(1)]],
+        z: [[p.z.toFixed(1)]],
+      }, [0]);
+
+
+      // move marker
+
+      Plotly.restyle('plot', {
+        x: [[p.x.toFixed(1)]],
+        y: [[p.y.toFixed(1)]],
+        z: [[p.z.toFixed(1)]],
+      }, [1]);
+
+
+
+    }
+
+    initXR();
+    //initPlot();
+  </script>
+</body>
+
+</html>
