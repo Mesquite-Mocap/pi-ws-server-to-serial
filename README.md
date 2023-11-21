@@ -35,6 +35,7 @@ sudo apt-get install --reinstall ca-certificates
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt-get update
 sudo apt-get install python2.7
+sudo rm /usr/bin/python
 sudo ln -s /usr/bin/python2.7 /usr/bin/python
 
 sudo npm install -g n
