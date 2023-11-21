@@ -140,9 +140,9 @@
   </div>
   <script>
     var thePlot;
-    var ws;
   </script>
   <script type="module">
+    var ws;
     function startWebSocket() {
       ws = new WebSocket("ws://" + window.location.hostname + ":80");
       ws.onopen = function () {
