@@ -140,8 +140,24 @@
   </div>
   <script>
     var thePlot;
+    var ws;
   </script>
   <script type="module">
+    function startWebSocket() {
+      ws = new WebSocket("ws://" + window.location.hostname + ":80");
+      ws.onopen = function () {
+        ws.send("Hello, world");
+      };
+      ws.onmessage = function (evt) {
+        var received_msg = evt.data;
+        console.log("Message is received...");
+        console.log(received_msg);
+      };
+      ws.onclose = function () {
+        // websocket is closed.
+        console.log("Connection is closed...");
+      };
+    }
     // XR globals.
     let xrButton = document.getElementById('xr-button');
     let xrSession = null;
@@ -384,6 +400,20 @@
         z: [[p.z.toFixed(1)]],
       }, [1]);
 
+      var out = {
+        position: {
+          x: p.x.toFixed(1),
+          y: p.y.toFixed(1),
+          z: p.z.toFixed(1)
+        },
+        w: q.w.toFixed(3),
+        x: q.x.toFixed(3),
+        y: q.y.toFixed(3),
+        z: q.z.toFixed(3),
+        bone: "Spine"
+      }
+      ws.send(JSON.stringify(out));
+    }
 
 
     }
