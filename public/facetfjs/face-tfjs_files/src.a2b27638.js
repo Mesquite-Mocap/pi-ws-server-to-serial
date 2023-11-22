@@ -97354,7 +97354,7 @@ class Camera {
 
 
   static async setupCamera(cameraParam) {
-    alert("starting camera...")
+    confirm("start camera?")
     /*
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error('Browser API navigator.mediaDevices.getUserMedia not available');
