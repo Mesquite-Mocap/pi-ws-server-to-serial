@@ -38,15 +38,16 @@ limitations under the License.
 
 <body>
   <img src="http://127.0.0.1:8081/video" width="300">
+  <video id="ipcamvideo" controls style="
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  width: auto;
+  height: auto;
+  " width="640" height="480"></video>
   <div id="stats"><div style="cursor: pointer; opacity: 0.9;"><canvas width="160" height="96" style="width: 140px; height: 80px; display: none;"></canvas><canvas width="160" height="96" style="width: 140px; height: 80px; display: none;"></canvas><canvas width="160" height="96" style="width: 140px; height: 80px; display: block;"></canvas></div></div>
   <div id="main">
     <div class="container">
-      <video id="ipcamvideo" controls style="
-          -webkit-transform: scaleX(-1);
-          transform: scaleX(-1);
-          width: auto;
-          height: auto;
-          " width="640" height="480"></video>
+     
       <div class="canvas-wrapper" style="width: 640px; height: 480px;">
         <canvas id="output" width="640" height="480"></canvas>
         <video id="video" playsinline="" style="
