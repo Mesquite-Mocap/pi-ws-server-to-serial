@@ -1,3 +1,6 @@
+
+
+
 // namespace MJPEG { ...
 var MJPEG = (function(module) {
     "use strict";
@@ -62,7 +65,7 @@ var MJPEG = (function(module) {
         options = {};
       }
       options.url = url;
-      //options.onFrame = updateFrame;
+      options.onFrame = updateFrame;
       options.onStart = function() {// console.log("started");
   
      
@@ -97,10 +100,10 @@ var MJPEG = (function(module) {
       //var tipc = parent.require("electron").ipcRenderer;
       function updateFrame(img) {
           
-        frameC++;
-        if(frameC%60 === 0){
+        //frameC++;
+       // if(frameC%60 === 0){
          // tipc.send('iamup', chName);
-        }
+       // }
           img.crossOrigin = 'Anonymous';
          convertImgToDataURLviaCanvas(img, function(data){
          
@@ -116,8 +119,8 @@ var MJPEG = (function(module) {
             width: canvas.width,
             height: canvas.height
           });
-          document.getElementById("odCanvas").width = canvas.width;
-          document.getElementById("odCanvas").height = canvas.height;
+          //document.getElementById("odCanvas").width = canvas.width;
+          //document.getElementById("odCanvas").height = canvas.height;
   
   
   
@@ -137,60 +140,8 @@ var MJPEG = (function(module) {
       //     document.getElementById("hImage").src = "../download-6.png"
       var byt = document.getElementById("hImage")
   
-    if(model && modelOn && odsmp){
-      odsmp = false;
-      byt.onload=function(){
-      model.detect(byt).then(predictions => {
-       //    document.getElementById("hImage").src = "";
-        console.log(".." + JSON.stringify(predictions))
-      //   $("#modelStatus").html(JSON.stringify(predictions))
-        drawVideoPredictions(predictions, document.getElementById("odCanvas"))
-        try{
-          document.getElementById("local-message-dc").value=JSON.stringify(predictions)
-          document.getElementById("sdcMessage").click();
-          odsmp = true;
-        }
-        catch{
-          odsmp = true;
-        }
-      })
-      }
-      byt.src = canvas.toDataURL();
-    }
-  
-     // setTimeout(function(){
-          var fh = window.innerWidth/canvas.width * canvas.height;
-          if(fh > window.innerHeight){
-            cDiv.style.transform =  "scale(" +  window.innerHeight/canvas.height+ ")" + "translate(-50%,-50%)";
-          }
-          else{
-            cDiv.style.transform =   "scale(" +  window.innerWidth/canvas.width+ ")" + "translate(-50%,-50%)";
-          }
-  
-          /*
-        if(frameC% 8 === 0){
-          function isArraySame(){
-            for(var i = 0; i < frameLen.length-1; i++){
-              for(var j = i; j < frameLen.length; j++){
-                if(frameLen[i] != frameLen[j]){
-                  return false;
-                }
-              }
-            }
-            return true;
-          }
-          if(isArraySame()){
-           window.location.reload();
-  
-          }
-        }
-        
-          frameC++;
-          frameLen[frameLen.length] = canvas.toDataURL().length
-          frameLen.shift();
-        //  console.log(frameC, frameLen);
-  */
-     //   }, 0);
+
+
   
         } catch (e) {
           // if we can't draw, don't bother updating anymore

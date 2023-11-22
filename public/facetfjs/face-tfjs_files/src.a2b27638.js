@@ -97355,7 +97355,7 @@ class Camera {
 
   static async setupCamera(cameraParam) {
     //confirm("start camera?")
-    /*
+    
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error('Browser API navigator.mediaDevices.getUserMedia not available');
     }
@@ -97378,18 +97378,10 @@ class Camera {
         }
       }
     };
-    var mjpeg = "http://127.0.0.1:8081/video";
-    // get stream from mjpeg
-
-
-
-
-
-
     const stream = await navigator.mediaDevices.getUserMedia(videoConfig);
     
-*/
-    const stream = await document.getElementById("ipcamvideo").captureStream();
+
+    //const stream = await document.getElementById("ipcamvideo").captureStream();
 
     const camera = new Camera();
     camera.video.srcObject = stream;

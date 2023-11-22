@@ -880,46 +880,34 @@ limitations under the License.
         style="width: 140px; height: 80px; display: block;"></canvas></div>
   </div>
 
-      <div class="canvas-wrapper" style="width: 640px; height: 480px;">
-        <canvas id="output" width="640" height="480"></canvas>
-        <video id="video" playsinline="" style="
+  <div class="canvas-wrapper" style="width: 640px; height: 480px;">
+    <canvas id="output" width="640" height="480"></canvas>
+    <video id="video" playsinline="" style="
           -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
           visibility: hidden;
           width: auto;
           height: auto;
           " width="640" height="480">
-        </video>
+    </video>
 
   </div>
   <img id="image" src="http://127.0.0.1:8081/video" width="300" style="opacity:.5;">
-  <canvas id="ipcamvideo" crossorigin="anonymous" width="640" height="480" >
-   
+  <canvas id="ipcamvideo" crossorigin="anonymous" width="640" height="480">
+
   </canvas>
-<script src="face-tfjs_files/mjpeg.js"> </script>
-<script>
-
-
-
-var player = new MJPEG.Player("ipcamvideo", "http://localhost:8081/video");
-    
-
-
-
-
-      </script>
-    
- 
+  <script src="face-tfjs_files/mjpeg.js"> </script>
+  
   <script src="face-tfjs_files/dat.gui.min.js"></script>
   <script src="face-tfjs_files/Stats.min.js"></script>
-  
- <script src="face-tfjs_files/src.a2b27638.js"></script>
+
+  <script src="face-tfjs_files/src.a2b27638.js"></script>
   <script src="face-tfjs_files/face_mesh_solution_packed_assets_loader.js" crossorigin="anonymous"></script>
   <script src="face-tfjs_files/face_mesh_solution_simd_wasm_bin.js" crossorigin="anonymous"></script>
 
 
 
- 
+
 
 </body>
 
