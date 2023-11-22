@@ -910,14 +910,7 @@ image.onload = function() {
   drawFrame();
 };
 
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://127.0.0.1:8081/video');
-xhr.responseType = 'arraybuffer';
-xhr.onload = function() {
-  var imageData = new ImageData(new Uint8Array(xhr.response), 640, 480);
-  image.src = 'data:image/jpeg;base64,' + btoa(imageData);
-};
-xhr.send();
+setInterval(drawFrame, 1000 / 60);
 
   </script>
 
