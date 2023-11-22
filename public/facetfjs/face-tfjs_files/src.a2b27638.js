@@ -97934,14 +97934,15 @@ async function renderPrediction() {
 
 async function app() {
   // Gui content will change depending on which model is in the query string.
+  /*
   const urlParams = new URLSearchParams(window.location.search);
 
   if (!urlParams.has('model')) {
     alert('Cannot find model in the query string.');
     return;
   }
-
-  await (0, _option_panel.setupDatGui)(urlParams);
+*/
+  await (0, _option_panel.setupDatGui)({model:"mediapipe_face_mesh"});
   stats = (0, _stats_panel.setupStats)();
   camera = await _camera.Camera.setupCamera(_params.STATE.camera);
   await (0, _util.setBackendAndEnvFlags)(_params.STATE.flags, _params.STATE.backend);
