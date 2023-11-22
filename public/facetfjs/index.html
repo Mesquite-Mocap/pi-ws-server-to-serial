@@ -893,117 +893,35 @@ limitations under the License.
       </div>
     </div>
   </div>
-
   <script>
 
 
-function drawFrame() {
-  var canvas = document.getElementById('ipcamvideo');
-  var ctx = canvas.getContext('2d');
-  var image = document.getElementById('image');
-
-  ctx.drawImage(image, 0, 0, 640, 480);
-}
-
-var image = document.getElementById('image');
-image.onload = function() {
-  drawFrame();
-};
-
-setInterval(drawFrame, 1000 / 60);
-
-  </script>
-
+    function drawFrame() {
+      var canvas = document.getElementById('ipcamvideo');
+      var ctx = canvas.getContext('2d');
+      var image = document.getElementById('image');
+      
+    
+      ctx.drawImage(image, 0, 0, 640, 480);
+    }
+    
+    var image = document.getElementById('image');
+    image.onload = function() {
+      drawFrame();
+    };
+    
+    setInterval(drawFrame, 1000 / 60);
+    
+      </script>
+    
+ 
   <script src="face-tfjs_files/dat.gui.min.js"></script>
   <script src="face-tfjs_files/Stats.min.js"></script>
   <script src="face-tfjs_files/src.a2b27638.js"></script>
-  <div class="dg ac">
-    <div class="dg main a" style="user-select: none; width: 300px;" id="gui">
-      <div style="width: 6px; margin-left: -3px; height: 308px; cursor: ew-resize; position: absolute;"></div>
-      <ul style="height: auto;">
-        <li class="folder">
-          <div class="dg">
-            <ul>
-              <li class="title">Camera</li>
-              <li class="cr number">
-                <div><span class="property-name">targetFPS</span>
-                  <div class="c"><input type="text" value="60"></div>
-                </div>
-              </li>
-              <li class="cr string">
-                <div><span class="property-name">sizeOption</span>
-                  <div class="c"><select>
-                      <option value="640 X 480" selected="selected">640 X 480</option>
-                      <option value="640 X 360">640 X 360</option>
-                      <option value="360 X 270">360 X 270</option>
-                    </select></div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="folder">
-          <div class="dg">
-            <ul>
-              <li class="title">Model</li>
-              <li class="cr string">
-                <div><span class="property-name">model</span>
-                  <div class="c"><select>
-                      <option value="MediaPipeFaceMesh" selected="selected">MediaPipeFaceMesh</option>
-                    </select></div>
-                </div>
-              </li>
-              <li class="cr boolean">
-                <div><span class="property-name">boundingBox</span>
-                  <div class="c"><input type="checkbox" checked="checked"></div>
-                </div>
-              </li>
-              <li class="cr boolean">
-                <div><span class="property-name">triangulateMesh</span>
-                  <div class="c"><input type="checkbox" checked="checked"></div>
-                </div>
-              </li>
-              <li class="cr boolean">
-                <div><span class="property-name">refineLandmarks</span>
-                  <div class="c"><input type="checkbox" checked="checked"></div>
-                </div>
-              </li>
-              <li class="cr number has-slider">
-                <div><span class="property-name">maxFaces</span>
-                  <div class="c">
-                    <div><input type="text" value="1"></div>
-                    <div class="slider">
-                      <div class="slider-fg" style="width: 0%;"></div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="folder">
-          <div class="dg">
-            <ul>
-              <li class="title">Backend</li>
-              <li class="cr string">
-                <div><span class="property-name">runtime-backend</span>
-                  <div class="c"><select>
-                      <option value="mediapipe-gpu" selected="selected">mediapipe-gpu</option>
-                      <option value="tfjs-webgl">tfjs-webgl</option>
-                    </select></div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-      <div class="close-button close-bottom" style="width: 300px;">Close Controls</div>
-    </div>
-  </div>
-
-
   <script src="face-tfjs_files/face_mesh_solution_packed_assets_loader.js" crossorigin="anonymous"></script>
   <script src="face-tfjs_files/face_mesh_solution_simd_wasm_bin.js" crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>
