@@ -65,7 +65,7 @@ limitations under the License.
         var videoElement = document.getElementById('ipcamvideo');
         var flvPlayer = flvjs.createPlayer({
             type: 'flv',
-            url: 'http://127.0.0.1:8081/video'
+            url: 'http://' +  window.location.hostname + ':8081/video'
         });
         flvPlayer.attachMediaElement(videoElement);
         flvPlayer.load();
