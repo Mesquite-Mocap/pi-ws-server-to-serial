@@ -97934,16 +97934,16 @@ async function renderPrediction() {
 
 async function app() {
   // Gui content will change depending on which model is in the query string.
-  /*
+  
   const urlParams = new URLSearchParams(window.location.search);
+  urlParams.model = "mediapipe_face_mesh";
 
   if (!urlParams.has('model')) {
     alert('Cannot find model in the query string.');
     return;
   }
-  */
+  
 
-  const urlParams = {model:"mediapipe_face_mesh"};
 
   await (0, _option_panel.setupDatGui)(urlParams);
   stats = (0, _stats_panel.setupStats)();
