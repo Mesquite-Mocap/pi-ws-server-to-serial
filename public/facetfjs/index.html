@@ -16,6 +16,8 @@ limitations under the License.
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0, user-scalable=no">
+  <script src="https://cdn.bootcdn.net/ajax/libs/flv.js/1.6.1/flv.min.js"></script>
+
   <style>
     body {
       margin: 0;
@@ -869,6 +871,8 @@ limitations under the License.
 </head>
 
 <body>
+  <button style='position:fixed;top:10px;left:10px;z-index:99999999' onclick="start()">Start</button>
+
   <div id="stats">
     <div style="cursor: pointer; opacity: 0.9;"><canvas width="160" height="96"
         style="width: 140px; height: 80px; display: none;"></canvas><canvas width="160" height="96"
@@ -889,36 +893,18 @@ limitations under the License.
 
   </div>
   <img id="image" src="http://127.0.0.1:8081/video" width="300" style="opacity:.5;">
-  <canvas id="ipcamvideo" style="" crossorigin="anonymous" width="640" height="480" ></canvas>
-  <script>
+  <canvas id="ipcamvideo" crossorigin="anonymous" width="640" height="480" >
+   
+  </canvas>
+<script src="face-tfjs_files/mjpeg.js"> </script>
+<script>
 
 
-    function drawFrame() {
-      var canvas = document.getElementById('ipcamvideo');
-      var ctx = canvas.getContext('2d');
-      var image = document.getElementById('image');
-      
-    
-      ctx.drawImage(image, 0, 0, 640, 480);
-    }
-    
-    setInterval(drawFrame, 1000 / 60);
 
-    //load js file
+var player = new MJPEG.Player("ipcamvideo", "http://localhost:8081/video");
     
-    function start(){
 
-    
-    var script = document.createElement('script');
-    script.src = "face-tfjs_files/src.a2b27638.js";
-    document.head.appendChild(script);
-    var script = document.createElement('script');
-    script.src = "face-tfjs_files/face_mesh_solution_packed_assets_loader.js";
-    document.head.appendChild(script);
-    var script = document.createElement('script');
-    script.src = "face-tfjs_files/face_mesh_solution_simd_wasm_bin.js";
-    document.head.appendChild(script);
-  }
+
 
 
       </script>
@@ -926,13 +912,13 @@ limitations under the License.
  
   <script src="face-tfjs_files/dat.gui.min.js"></script>
   <script src="face-tfjs_files/Stats.min.js"></script>
-  <!--
+  
  <script src="face-tfjs_files/src.a2b27638.js"></script>
   <script src="face-tfjs_files/face_mesh_solution_packed_assets_loader.js" crossorigin="anonymous"></script>
   <script src="face-tfjs_files/face_mesh_solution_simd_wasm_bin.js" crossorigin="anonymous"></script>
 
 
-  -->
+
  
 
 </body>
