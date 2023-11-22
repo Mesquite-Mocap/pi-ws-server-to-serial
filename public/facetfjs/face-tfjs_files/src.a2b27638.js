@@ -97354,6 +97354,7 @@ class Camera {
 
 
   static async setupCamera(cameraParam) {
+    /*
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error('Browser API navigator.mediaDevices.getUserMedia not available');
     }
@@ -97376,7 +97377,19 @@ class Camera {
         }
       }
     };
+    var mjpeg = "http://127.0.0.1:8081/video";
+    // get stream from mjpeg
+
+
+
+
+
+
     const stream = await navigator.mediaDevices.getUserMedia(videoConfig);
+    */
+
+    const stream = document.getElementById("ipcamvideo").captureStream();
+
     const camera = new Camera();
     camera.video.srcObject = stream;
     await new Promise(resolve => {
@@ -97456,7 +97469,7 @@ const stringValueMap = {};
 async function setupModelFolder(gui, urlParams) {
   // The model folder contains options for model selection.
   const modelFolder = gui.addFolder('Model');
-  const model = urlParams.get('model');
+  const model = "mediapipe_face_mesh" //urlParams.get('model');
 
   switch (model) {
     case 'mediapipe_face_mesh':
@@ -97902,6 +97915,7 @@ async function renderResult() {
       faces = await detector.estimateFaces(camera.video, {
         flipHorizontal: false
       });
+      console.log(faces[0]);
     } catch (error) {
       detector.dispose();
       detector = null;
@@ -97936,12 +97950,13 @@ async function app() {
   // Gui content will change depending on which model is in the query string.
   
   const urlParams = new URLSearchParams(window.location.search);
-  urlParams.model = "mediapipe_face_mesh";
+ // alert(urlParams);
+ // urlParams.model = "mediapipe_face_mesh";
 
-  if (!urlParams.has('model')) {
-    alert('Cannot find model in the query string.');
-    return;
-  }
+ // if (!urlParams.has('model')) {
+ //   alert('Cannot find model in the query string.');
+ //   return;
+ // }
   
 
 
