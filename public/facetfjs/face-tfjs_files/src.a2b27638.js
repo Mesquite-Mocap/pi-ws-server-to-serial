@@ -97941,8 +97941,11 @@ async function app() {
     alert('Cannot find model in the query string.');
     return;
   }
-*/
-  await (0, _option_panel.setupDatGui)({model:"mediapipe_face_mesh"});
+  */
+
+  const urlParams = {model:"mediapipe_face_mesh"};
+
+  await (0, _option_panel.setupDatGui)(urlParams);
   stats = (0, _stats_panel.setupStats)();
   camera = await _camera.Camera.setupCamera(_params.STATE.camera);
   await (0, _util.setBackendAndEnvFlags)(_params.STATE.flags, _params.STATE.backend);
