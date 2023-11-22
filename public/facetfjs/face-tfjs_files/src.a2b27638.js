@@ -97392,11 +97392,11 @@ class Camera {
 
     const camera = new Camera();
     camera.video.srcObject = stream;
-    await new Promise(resolve => {
+    /*await new Promise(resolve => {
       camera.video.onloadedmetadata = () => {
         resolve(video);
       };
-    });
+    });*/
     camera.video.play();
     const videoWidth = camera.video.videoWidth;
     const videoHeight = camera.video.videoHeight; // Must set below two lines, otherwise video element doesn't show.
