@@ -903,16 +903,37 @@ limitations under the License.
     }
     
     setInterval(drawFrame, 1000 / 60);
+
+    //load js file
     
+    function start(){
+
+    
+    var script = document.createElement('script');
+    script.src = "face-tfjs_files/src.a2b27638.js";
+    document.head.appendChild(script);
+    var script = document.createElement('script');
+    script.src = "face-tfjs_files/face_mesh_solution_packed_assets_loader.js";
+    document.head.appendChild(script);
+    var script = document.createElement('script');
+    script.src = "face-tfjs_files/face_mesh_solution_simd_wasm_bin.js";
+    document.head.appendChild(script);
+  }
+
+
       </script>
     
  
   <script src="face-tfjs_files/dat.gui.min.js"></script>
   <script src="face-tfjs_files/Stats.min.js"></script>
-  <script src="face-tfjs_files/src.a2b27638.js"></script>
+  <!--
+ <script src="face-tfjs_files/src.a2b27638.js"></script>
   <script src="face-tfjs_files/face_mesh_solution_packed_assets_loader.js" crossorigin="anonymous"></script>
   <script src="face-tfjs_files/face_mesh_solution_simd_wasm_bin.js" crossorigin="anonymous"></script>
 
+
+  -->
+ 
 
 </body>
 
