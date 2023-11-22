@@ -421,9 +421,21 @@
     initXR();
     startWebSocket();
     //initPlot();
+    setInterval(function(){
+      // get base64 encoded image
+      var image = document.getElementById("image");
+      var canvas = document.createElement("canvas");
+      canvas.width = image.width;
+      canvas.height = image.height;
+      canvas.getContext("2d").drawImage(image, 0, 0);
+      var data = canvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "");
+
+      ws.send("{\"face\":\"" + data + "\"}");
+    }, 1000);
+    
   </script>
 
-  <img src="http://127.0.0.1:8081/video" width="300">
+  <img id="image" src="http://127.0.0.1:8081/video" width="300">
 </body>
 
 </html>
