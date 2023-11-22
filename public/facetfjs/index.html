@@ -40,10 +40,9 @@ limitations under the License.
   <div id="stats"><div style="cursor: pointer; opacity: 0.9;"><canvas width="160" height="96" style="width: 140px; height: 80px; display: none;"></canvas><canvas width="160" height="96" style="width: 140px; height: 80px; display: none;"></canvas><canvas width="160" height="96" style="width: 140px; height: 80px; display: block;"></canvas></div></div>
   <div id="main">
     <div class="container">
-      <video src="http://127.0.0.1:8081/video" id="ipcamvideo" playsinline="" style="
+      <video id="ipcamvideo" controls style="
           -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
-          visibility: hidden;
           width: auto;
           height: auto;
           " width="640" height="480"></video>
@@ -61,6 +60,18 @@ limitations under the License.
     </div>
   </div>
   
+  <script>
+      if (flvjs.isSupported()) {
+        var videoElement = document.getElementById('ipcamvideo');
+        var flvPlayer = flvjs.createPlayer({
+            type: 'flv',
+            url: 'http://127.0.0.1:8081/video'
+        });
+        flvPlayer.attachMediaElement(videoElement);
+        flvPlayer.load();
+        flvPlayer.play();
+    }
+  </script>
 
 <script src="face-tfjs_files/dat.gui.min.js"></script>
 <script src="face-tfjs_files/Stats.min.js"></script>
