@@ -97354,7 +97354,7 @@ class Camera {
 
 
   static async setupCamera(cameraParam) {
-    /*
+    
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error('Browser API navigator.mediaDevices.getUserMedia not available');
     }
@@ -97386,9 +97386,9 @@ class Camera {
 
 
     const stream = await navigator.mediaDevices.getUserMedia(videoConfig);
-    */
+    
 
-    const stream = document.getElementById("ipcamvideo").captureStream();
+    //const stream = document.getElementById("ipcamvideo").captureStream();
 
     const camera = new Camera();
     camera.video.srcObject = stream;
