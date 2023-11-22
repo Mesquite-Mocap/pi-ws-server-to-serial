@@ -869,13 +869,8 @@ limitations under the License.
 </head>
 
 <body>
-  <img src="http://127.0.0.1:8081/video" width="300">
-  <video id="ipcamvideo" controls style="
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
-  width: auto;
-  height: auto;
-  " width="640" height="480"></video>
+  <img id="image" src="http://127.0.0.1:8081/video" width="300">
+  <canvas id="ipcamvideo"></canvas>
   <div id="stats">
     <div style="cursor: pointer; opacity: 0.9;"><canvas width="160" height="96"
         style="width: 140px; height: 80px; display: none;"></canvas><canvas width="160" height="96"
@@ -899,26 +894,35 @@ limitations under the License.
     </div>
   </div>
 
-  <script src="face-tfjs_files/flv.min.js"></script>
   <script>
-    if (flvjs.isSupported()) {
-      alert('flvjs is supported');
-      var videoElement = document.getElementById('ipcamvideo');
-      var flvPlayer = flvjs.createPlayer({
-        type: 'flv',
-        url: 'http://127.0.0.1:8081/video',
-        url: '/live.flv',
-        isLive: true,
-        withCredentials: true
-      }, {
-        fixAudioTimestampGap: false
-      });
-  
-    
-    flvPlayer.attachMediaElement(videoElement);
-    flvPlayer.load();
-    flvPlayer.play();
-    }
+    var image = document.getElementById('image');
+image.onload = function() {
+  drawFrame();
+};
+
+var image = document.getElementById('image');
+image.onload = function() {
+  drawFrame();
+};
+
+function drawFrame() {
+  var canvas = document.getElementById('ipcamvideo');
+  var ctx = canvas.getContext('2d');
+  var image = document.getElementById('image');
+
+  ctx.drawImage(image, 0, 0, 640, 480);
+}
+
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://127.0.0.1:8081/video', true);
+xhr.responseType = 'arraybuffer';
+xhr.onload = function() {
+  var imageData = new ImageData(new Uint8Array(xhr.response), 640, 480);
+  image.src = 'data:image/jpeg;base64,' + btoa(imageData);
+};
+xhr.send();
+
   </script>
 
   <script src="face-tfjs_files/dat.gui.min.js"></script>
