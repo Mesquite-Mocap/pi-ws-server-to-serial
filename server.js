@@ -75,7 +75,6 @@ server.listen(p, "0.0.0.0", () => {
 
 var request = require("request");
 var MjpegConsumer = require("mjpeg-consumer");
-const { write } = require('fs');
 
 var consumerR = new MjpegConsumer();
 request("http://192.168.1.101:8081/video")
