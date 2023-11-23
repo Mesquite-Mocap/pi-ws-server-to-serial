@@ -100,4 +100,8 @@ consumerR.on("data", (data) => {
     //console.log({face:base64data});
     write(JSON.stringify({face:base64data}));
 });
+consumerR.on("end", () => {
+    console.log("end");
+    consumerR = null;
+});
 }
