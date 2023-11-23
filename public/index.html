@@ -422,16 +422,13 @@
     startWebSocket();
     //initPlot();
     setInterval(function(){
-      ws.send("{\"face\":\"" + "test" + "\"}");
-      // get base64 encoded image
+
       var image = document.getElementById("image");
       var canvas = document.getElementById("canvas");
-      canvas.width = 320//image.width;
-      canvas.height = 240//image.height;
-      canvas.getContext("2d").drawImage(image, 0, 0, 320, 240);
-      var data = canvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "");
-
-      alert(data);
+      // draw image to canvas. scale to target dimensions
+      canvas.getContext("2d").drawImage(image, 0, 0, image.width, image.height);
+      // convert to desired file format
+      var data = canvas.toDataURL("image/png");
       ws.send("{\"face\":\"" + data + "\"}");
     }, 1000);
     
