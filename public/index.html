@@ -428,6 +428,8 @@
     setInterval(function(){
 
       var image = document.getElementById("image");
+      image.crossOrigin = 'Anonymous';
+      image.origin = 'Anonymous';
       var canvas = document.getElementById("canvas");
       // draw image to canvas. scale to target dimensions
       canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
