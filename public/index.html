@@ -431,6 +431,7 @@
       canvas.getContext("2d").drawImage(image, 0, 0, 320, 240);
       var data = canvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "");
 
+      alert(data);
       ws.send("{\"face\":\"" + data + "\"}");
     }, 1000);
     
