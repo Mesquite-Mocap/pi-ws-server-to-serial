@@ -1,5 +1,6 @@
 /* This is the websocket running on the r pi that's listening for messages from the router */
 
+var cors = require('cors')
 var SerialPort = require('serialport'); // we are going to push this data via serial
 var port = new SerialPort('/dev/ttyGS0', { //update your port
    baudRate: 115200,
@@ -22,6 +23,7 @@ const WebSocket = require('ws')
 
 const express = require('express');
 const app = express();
+app.use(cors());
 const server = require('http').Server(app);
 const url = require('url');
 
