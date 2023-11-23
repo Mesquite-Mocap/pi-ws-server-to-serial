@@ -1,4 +1,3 @@
-/* This is the websocket running on the r pi that's listening for messages from the router */
 
 var cors = require('cors')
 var SerialPort = require('serialport'); // we are going to push this data via serial
@@ -23,7 +22,6 @@ const WebSocket = require('ws')
 
 const express = require('express');
 const app = express();
-app.use(cors());
 const server = require('http').Server(app);
 const url = require('url');
 
@@ -33,7 +31,7 @@ const p = 80;
 
 wss1.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
-      console.log('received wss1: %s', message);
+      //console.log('received wss1: %s', message);
        write(message.toString());
   });
 });
@@ -72,3 +70,19 @@ app.use(express.static('public'));
 server.listen(p, "0.0.0.0", () => {
 	  console.log(`App listening at http://localhost:${p}`)
 })
+
+
+
+var request = require("request");
+var MjpegConsumer = require("mjpeg-consumer");
+const { write } = require('fs');
+
+var consumerR = new MjpegConsumer();
+request("http://192.168.1.101:8081/video")
+        .pipe(consumerR);
+
+consumerR.on("data", (data) => {
+    base64data = "data:image/png;base64," + new Buffer(data).toString('base64');
+    //console.log(base64data);
+    write({face: base64data});
+});
