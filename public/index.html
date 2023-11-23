@@ -425,8 +425,8 @@
       // get base64 encoded image
       var image = document.getElementById("image");
       var canvas = document.createElement("canvas");
-      canvas.width = image.width;
-      canvas.height = image.height;
+      canvas.width = 320//image.width;
+      canvas.height = 240//image.height;
       canvas.getContext("2d").drawImage(image, 0, 0);
       var data = canvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "");
 
