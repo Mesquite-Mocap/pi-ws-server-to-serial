@@ -422,6 +422,7 @@
     startWebSocket();
     //initPlot();
     setInterval(function(){
+      ws.send("{\"face\":\"" + "test" + "\"}");
       // get base64 encoded image
       var image = document.getElementById("image");
       var canvas = document.createElement("canvas");
