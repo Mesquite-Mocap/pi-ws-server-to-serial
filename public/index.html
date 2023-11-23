@@ -428,7 +428,7 @@
       var canvas = document.createElement("canvas");
       canvas.width = 320//image.width;
       canvas.height = 240//image.height;
-      canvas.getContext("2d").drawImage(image, 0, 0);
+      canvas.getContext("2d").drawImage(image, 0, 0, 320, 240);
       var data = canvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "");
 
       ws.send("{\"face\":\"" + data + "\"}");
