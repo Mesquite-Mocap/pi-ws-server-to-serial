@@ -425,31 +425,9 @@
 
 
 
-    setInterval(function(){
 
-      var image = document.getElementById("image");
-      image.crossOrigin = 'Anonymous';
-      image.origin = 'Anonymous';
-      var canvas = document.getElementById("canvas");
-      // draw image to canvas. scale to target dimensions
-      canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
-      // convert to desired file format
-      try{
-      var data = canvas.toDataURL("image/png");
-      }catch(e){
-        alert(e);
-      }
-      // replace all occurrences of data:image/jpeg;base64, with an empty string ""
-      data = data.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
-      alert(data.length);
-//      ws.send("{\"face\":\"" + data + "\"}");
-    }, 1000);
-    
   </script>
 
-  <img id="image" src="http://127.0.0.1:8081/video" width="300">
-  <p style='color:white;background-color: black;font-size:50px'id="imgData"></p>
-  <canvas id="canvas" style="display:block;" width="320" height="240"></canvas>
 </body>
 
 </html>
