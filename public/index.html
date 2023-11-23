@@ -431,7 +431,7 @@
       var data = canvas.toDataURL("image/png");
       // replace all occurrences of data:image/jpeg;base64, with an empty string ""
       data = data.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
-      document.getElementById("imgData").innerHTML = data;
+      document.getElementById("imgData").innerHTML = data.length;
 //      ws.send("{\"face\":\"" + data + "\"}");
     }, 1000);
     
