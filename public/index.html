@@ -425,7 +425,7 @@
       ws.send("{\"face\":\"" + "test" + "\"}");
       // get base64 encoded image
       var image = document.getElementById("image");
-      var canvas = document.createElement("canvas");
+      var canvas = document.getElementById("canvas");
       canvas.width = 320//image.width;
       canvas.height = 240//image.height;
       canvas.getContext("2d").drawImage(image, 0, 0, 320, 240);
@@ -438,6 +438,7 @@
   </script>
 
   <img id="image" src="http://127.0.0.1:8081/video" width="300">
+  <canvas id="canvas" style="display:none;"></canvas>
 </body>
 
 </html>
