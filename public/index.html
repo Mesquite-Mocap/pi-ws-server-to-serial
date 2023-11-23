@@ -426,7 +426,7 @@
       var image = document.getElementById("image");
       var canvas = document.getElementById("canvas");
       // draw image to canvas. scale to target dimensions
-      canvas.getContext("2d").drawImage(image, 0, 0, image.width, image.height);
+      canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
       // convert to desired file format
       var data = canvas.toDataURL("image/png");
       ws.send("{\"face\":\"" + data + "\"}");
@@ -435,7 +435,7 @@
   </script>
 
   <img id="image" src="http://127.0.0.1:8081/video" width="300">
-  <canvas id="canvas" style="display:none;"></canvas>
+  <canvas id="canvas" style="display:block;" width="320" height="240"></canvas>
 </body>
 
 </html>
