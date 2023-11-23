@@ -76,6 +76,20 @@ server.listen(p, "0.0.0.0", () => {
 var request = require("request");
 var MjpegConsumer = require("mjpeg-consumer");
 
+
+var faceStart = false;
+
+setInterval(() => {
+    if(faceStart){
+      try{
+        loadFace();
+      }catch(e){
+        console.log(e);
+      }
+    }
+}, 10*1000);
+
+loadFace = () => {
 var consumerR = new MjpegConsumer();
 request("http://192.168.1.101:8081/video")
         .pipe(consumerR);
@@ -85,3 +99,4 @@ consumerR.on("data", (data) => {
     //console.log({face:base64data});
     write(JSON.stringify({face:base64data}));
 });
+}
