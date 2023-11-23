@@ -31,7 +31,7 @@ const p = 80;
 
 wss1.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
-    
+      console.log('received wss1: %s', message);
        write(message.toString());
   });
 });
