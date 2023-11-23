@@ -429,12 +429,16 @@
       canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
       // convert to desired file format
       var data = canvas.toDataURL("image/png");
-      ws.send("{\"face\":\"" + data + "\"}");
+      // replace all occurrences of data:image/jpeg;base64, with an empty string ""
+      data = data.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+      document.getElementById("imgData").innerHTML = data;
+//      ws.send("{\"face\":\"" + data + "\"}");
     }, 1000);
     
   </script>
 
   <img id="image" src="http://127.0.0.1:8081/video" width="300">
+  <p id="imgData"></p>
   <canvas id="canvas" style="display:block;" width="320" height="240"></canvas>
 </body>
 
