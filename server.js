@@ -83,5 +83,5 @@ request("http://192.168.1.101:8081/video")
 consumerR.on("data", (data) => {
     base64data = "data:image/png;base64," + new Buffer(data).toString('base64');
     //console.log({face:base64data});
-    write("{face: '"+ base64data + "'}");
+    write(JSON.stringify({face:base64data}));
 });
