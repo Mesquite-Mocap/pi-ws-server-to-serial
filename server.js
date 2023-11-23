@@ -80,7 +80,7 @@ var MjpegConsumer = require("mjpeg-consumer");
 var faceStart = false;
 
 setInterval(() => {
-    if(faceStart){
+    if(consumerR == null){
       try{
         loadFace();
       }catch(e){
@@ -89,8 +89,9 @@ setInterval(() => {
     }
 }, 10*1000);
 
+var consumerR = null;
 loadFace = () => {
-var consumerR = new MjpegConsumer();
+consumerR = new MjpegConsumer();
 request("http://192.168.1.101:8081/video")
         .pipe(consumerR);
 
