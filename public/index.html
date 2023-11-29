@@ -384,7 +384,7 @@
       document.getElementById("cube").style.transform = 'translateZ(-100px) matrix3d(' + q1.toMatrix4() + ')';
 
       // append data
-
+/*
       Plotly.extendTraces('plot', {
         x: [[p.x.toFixed(1)]],
         y: [[p.y.toFixed(1)]],
@@ -400,6 +400,7 @@
         z: [[p.z.toFixed(1)]],
       }, [1]);
 
+      */
       var out = {
         sensorPosition: {
           x: p.x.toFixed(1),
@@ -412,6 +413,7 @@
         z: q.z.toFixed(3),
         bone: "Spine"
       }
+
       ws.send(JSON.stringify(out));
     }
 
