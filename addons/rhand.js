@@ -28,7 +28,7 @@ loadFace = () => {
     .pipe(consumerR);
 
   consumerR.on("data", (data) => {
-    console.log("data");
+    console.log(data);
     base64data = "data:image/png;base64," + new Buffer(data).toString('base64');
     write(JSON.stringify({ rhand: base64data }));
   });
