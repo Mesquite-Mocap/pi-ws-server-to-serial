@@ -1,6 +1,6 @@
 const WebSocket = require('ws');
 
-var ws = new WebSocket('ws://127.0.0.1:80/hub');
+var ws = new WebSocket('ws://0.0.0.0:80/hub');
 function write(str) {
     ws.send(str);
 }
@@ -28,8 +28,8 @@ loadFace = () => {
     .pipe(consumerR);
 
   consumerR.on("data", (data) => {
+    console.log("data");
     base64data = "data:image/png;base64," + new Buffer(data).toString('base64');
-    //console.log({face:base64data});
     write(JSON.stringify({ rhand: base64data }));
   });
   consumerR.on("end", () => { 
