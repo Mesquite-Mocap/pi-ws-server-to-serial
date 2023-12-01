@@ -1,5 +1,3 @@
-
-var cors = require('cors')
 var SerialPort = require('serialport'); // we are going to push this data via serial
 var port = new SerialPort('/dev/ttyGS0', { //update your port
   baudRate: 115200,
