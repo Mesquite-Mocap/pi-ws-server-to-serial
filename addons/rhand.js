@@ -24,7 +24,7 @@ setInterval(() => {
 var consumerR = null;
 loadFace = () => {
   consumerR = new MjpegConsumer();
-  request("http://mmright.local:8081/video")
+  request("http://mmright.local:8080/?action=stream")
     .pipe(consumerR);
 
   consumerR.on("data", (data) => {
