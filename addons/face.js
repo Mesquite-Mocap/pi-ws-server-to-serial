@@ -18,7 +18,7 @@ setInterval(() => {
 var consumerR = null;
 loadFace = () => {
   consumerR = new MjpegConsumer();
-  request("http://192.168.1.100:8081/video")
+  request("http://192.168.51.164:8081/video")
     .pipe(consumerR);
 
   consumerR.on("data", (data) => {
