@@ -1,19 +1,8 @@
-var SerialPort = require('serialport'); // we are going to push this data via serial
-var port = new SerialPort('/dev/ttyGS0', { //update your port
-  baudRate: 115200,
-  dataBits: 8,
-  parity: 'none',
-  stopBits: 1,
-  flowControl: false
-});
+const WebSocket = require('ws');
 
-
+var ws = new WebSocket('ws://localhost:80/hub');
 function write(str) {
-  port.write(str + '\n', function (err) { // the string being pushed
-    if (err) {
-      console.log("e");
-    }
-  })
+    ws.send(str);
 }
 
 var request = require("request");
