@@ -46,7 +46,7 @@ hash -r
 in the rpi shell.
 
 
-b. Make sure **serial interface** and **auto-logon for root user** are enabled (use `sudo rapsi-config`; restart to apply settings)
+b. Make sure **serial interface** and **auto-logon for root user** are enabled (use `sudo raspi-config`; restart to apply settings)
 
 
 
@@ -75,8 +75,8 @@ git clone https://github.com/Mesquite-Mocap/pi-ws-server-to-serial.git
 cd pi-ws-server-to-serial
 sudo chmod -R 777 /root/
 sudo chmod 777 -R .
-sudo npm install serialport
-sudo npm install ws
+sudo npm install serialport 
+sudo npm install ws cors request
 ```
 
 To start the server on boot you will need to add
