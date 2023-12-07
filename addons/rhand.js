@@ -2,7 +2,6 @@ const WebSocket = require('ws');
 
 var ws = new WebSocket('ws://0.0.0.0:80/hub');
 function write(str) {
-  //console.log(str);
     ws.send(str);
 }
 

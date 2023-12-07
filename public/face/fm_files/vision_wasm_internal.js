@@ -295,7 +295,7 @@ function isFileURI(filename) {
 
 var wasmBinaryFile;
 
-wasmBinaryFile = "vision_wasm_internal.wasm";
+wasmBinaryFile = "./vision_wasm_internal.wasm";
 
 if (!isDataURI(wasmBinaryFile)) {
  wasmBinaryFile = locateFile(wasmBinaryFile);

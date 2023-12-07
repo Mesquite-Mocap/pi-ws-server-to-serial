@@ -28,6 +28,7 @@
     
       function fetchRemotePackage(packageName, packageSize, callback, errback) {
         
+        //alert(packageName, packageSize);
         if (typeof process === 'object' && typeof process.versions === 'object' && typeof process.versions.node === 'string') {
           require('fs').readFile(packageName, function(err, contents) {
             if (err) {
