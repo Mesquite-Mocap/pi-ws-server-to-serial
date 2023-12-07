@@ -76,7 +76,7 @@ cd pi-ws-server-to-serial
 sudo chmod -R 777 /root/
 sudo chmod 777 -R .
 sudo npm install serialport 
-sudo npm install ws cors request
+sudo npm install ws cors request mjpeg-consumer
 ```
 
 To start the server on boot you will need to add
