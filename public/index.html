@@ -10,6 +10,7 @@
   <script src="kalman.js"></script>
   <script src='plotly-2.27.0.min.js'></script>
   <script src='d3.min.js'></script>
+  <script type="module" src="face.js"></script>
   <style>
     .cube {
       width: 40px;
@@ -393,18 +394,18 @@
       // append data
 /*
       Plotly.extendTraces('plot', {
-        x: [[p.x.toFixed(1)]],
-        y: [[p.y.toFixed(1)]],
-        z: [[p.z.toFixed(1)]],
+        x: [[p.x.toFixed(3)]],
+        y: [[p.y.toFixed(3)]],
+        z: [[p.z.toFixed(3)]],
       }, [0]);
 
 
       // move marker
 
       Plotly.restyle('plot', {
-        x: [[p.x.toFixed(1)]],
-        y: [[p.y.toFixed(1)]],
-        z: [[p.z.toFixed(1)]],
+        x: [[p.x.toFixed(3)]],
+        y: [[p.y.toFixed(3)]],
+        z: [[p.z.toFixed(3)]],
       }, [1]);
 
       */
