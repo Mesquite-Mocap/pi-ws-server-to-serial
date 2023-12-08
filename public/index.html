@@ -7,7 +7,6 @@
   <meta name='mobile-web-app-capable' content='yes'>
   <meta name='apple-mobile-web-app-capable' content='yes'>
   <script src="quaternion.min.js"></script>
-  <script src="kalman.js"></script>
   <script src='plotly-2.27.0.min.js'></script>
   <script src='d3.min.js'></script>
   <style>
@@ -376,10 +375,6 @@
         document.getElementById('pose').innerHTML = "<p style='color:red'>No pose</p><br><br>";
       }
     }
-
-    var kfX = new KalmanFilter();
-    var kfY = new KalmanFilter();
-    var kfZ = new KalmanFilter();
 
     function updatePose(p, q) {
       document.getElementById('pose').innerHTML = "Position: <br>" +
