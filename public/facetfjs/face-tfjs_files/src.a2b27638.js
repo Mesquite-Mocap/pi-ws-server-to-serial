@@ -97249,6 +97249,7 @@ function drawPath(ctx, points, closePath) {
 
 function drawResults(ctx, faces, triangulateMesh, boundingBox) {
   faces.forEach(face => {
+    console.log(face);
     const keypoints = face.keypoints.map(keypoint => [keypoint.x, keypoint.y]);
 
     if (boundingBox) {
