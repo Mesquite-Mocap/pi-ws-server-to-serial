@@ -148,14 +148,7 @@
     var thePlot;
   </script>
   <script type="module">
-    setInterval(function () {
-      var source = document.getElementById("source");
-      var canvas = document.getElementById("canvas");
-      var context = canvas.getContext("2d");
-      context.drawImage(source, 0, 0, 320, 240);
-      var dataURL = canvas.toDataURL("image/png");
-      ws.send(JSON.stringify({ face: dataURL }));
-    }, 1000 / 30);
+
 
     var ws;
     function startWebSocket() {
@@ -443,8 +436,17 @@
 
     initXR();
     startWebSocket();
+
     //initPlot();
 
+    setInterval(function () {
+      var source = document.getElementById("source");
+      var canvas = document.getElementById("canvas");
+      var context = canvas.getContext("2d");
+      context.drawImage(source, 0, 0, 320, 240);
+      var dataURL = canvas.toDataURL("image/png");
+      ws.send(JSON.stringify({ face: dataURL }));
+    }, 1000 / 30);
 
 
 
