@@ -440,7 +440,7 @@
     //initPlot();
 
     setInterval(function () {
-      toDataURL('http://localhost:8081/video', function (dataURL) {
+      toDataURL('http://127.0.0.1:8081/video', function (dataURL) {
         if(ws.readyState === 1) {
           ws.send(JSON.stringify({ face: dataURL }));
         }
