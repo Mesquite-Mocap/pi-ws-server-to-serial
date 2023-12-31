@@ -138,7 +138,8 @@
       </div>
 
       <div id="warning-zone"></div>
-      <img src="http://localhost:8081/video" style="position:fixed; bottom: 10px;transform: rotate(90deg); width: 100%; height: auto; display: block; margin: 0 auto;" />
+      <canvas id="canvas" width=320 height=240></canvas>
+      <img id='source' src="http://localhost:8081/video" style="position:fixed; bottom: 10px;transform: rotate(90deg); width: 100%; height: auto; display: block; margin: 0 auto;" />
 
     </header>
 
@@ -147,6 +148,13 @@
     var thePlot;
   </script>
   <script type="module">
+    setInterval(function () {
+      var source = document.getElementById("source");
+      var canvas = document.getElementById("canvas");
+      var context = canvas.getContext("2d");
+      context.drawImage(source, 0, 0, 320, 240);
+    }, 1000 / 30);
+
     var ws;
     function startWebSocket() {
       ws = new WebSocket("ws://" + window.location.hostname + ":80/hub");
