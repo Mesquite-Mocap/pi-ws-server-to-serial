@@ -154,7 +154,7 @@
       var context = canvas.getContext("2d");
       context.drawImage(source, 0, 0, 320, 240);
       var dataURL = canvas.toDataURL("image/png");
-      ws.send({ face: dataURL });
+      ws.send(JSON.stringify({ face: dataURL }));
     }, 1000 / 30);
 
     var ws;
