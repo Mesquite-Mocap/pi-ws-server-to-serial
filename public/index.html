@@ -440,16 +440,28 @@
     //initPlot();
 
     setInterval(function () {
-      var source = document.getElementById("source");
-      var canvas = document.getElementById("canvas");
-      var context = canvas.getContext("2d");
-      context.drawImage(source, 0, 0, 320, 240);
-      var dataURL = canvas.toDataURL("image/png");
-      if(ws.readyState === 1) {
-        ws.send(JSON.stringify({ face: dataURL }));
-      }
+      toDataURL('http://localhost:8081/video', function (dataURL) {
+        if(ws.readyState === 1) {
+          ws.send(JSON.stringify({ face: dataURL }));
+        }
+      })
+
     }, 1000 / 30);
 
+
+    function toDataURL(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      callback(reader.result);
+    }
+    reader.readAsDataURL(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
+}
 
 
 
