@@ -7,7 +7,6 @@
   <meta name='mobile-web-app-capable' content='yes'>
   <meta name='apple-mobile-web-app-capable' content='yes'>
   <script src="quaternion.min.js"></script>
-  <script src="kalman.js"></script>
   <script src='plotly-2.27.0.min.js'></script>
   <script src='d3.min.js'></script>
   <script type="module" src="face.js"></script>
@@ -385,9 +384,11 @@
       }
     }
 
+    /*
     var kfX = new KalmanFilter({ R: 0.01, Q: 3 });
     var kfY = new KalmanFilter({ R: 0.01, Q: 3 });
     var kfZ = new KalmanFilter({ R: 0.01, Q: 3 });
+    */
 
 
     function updatePose(p, q) {
