@@ -351,15 +351,14 @@
       window.location.reload();
     }
 
+    var frame = 0;
+    
     function onXRFrame(t, frame) {
+      frame++;
       let session = frame.session;
       session.requestAnimationFrame(onXRFrame);
-/*
+      if(frame < 4){
       gl.bindFramebuffer(gl.FRAMEBUFFER, session.renderState.baseLayer.framebuffer);
-
-      // Update the clear color so that we can observe the color in the
-      // headset changing over time. Use a scissor rectangle to keep the AR
-      // scene visible.
       const width = session.renderState.baseLayer.framebufferWidth;
       const height = session.renderState.baseLayer.framebufferHeight;
       gl.enable(gl.SCISSOR_TEST);
@@ -368,10 +367,7 @@
       //  black bg
       gl.clearColor(0, 0, 0, 1);
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-      // let time = Date.now();
-      // gl.clearColor(Math.cos(time / 2000), Math.cos(time / 4000), Math.cos(time / 6000), 0.5);
-      // gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-      */
+      }
 
       let pose = frame.getViewerPose(xrRefSpace);
       if (pose) {
