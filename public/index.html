@@ -11,6 +11,20 @@
   <script src='d3.min.js'></script>
   <script type="module" src="face.js"></script>
   <style>
+    body {
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      tap-highlight-color: rgba(0, 0, 0, 0);
+      user-select: none;
+      margin: 0;
+      margin-top: -20px;
+      padding: 0;
+      padding-top: 20px;
+      background: black;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden;
+    }
+
     .cube {
       width: 40px;
       height: 40px;
@@ -118,13 +132,13 @@
 
 <body style="margin:0;background: black; font-family:Arial, Helvetica, sans-serif">
   <div id="overlay" style="background-color: black;color:white; text-shadow: 0px 0px 2px black;">
-    <header>
+    <header style="background-color: black;margin-top:-30px;padding-top:50px">
       <h1>Mesquite Root</h1>
       <button id="xr-button" class="barebones-button" disabled>XR not found</button>
 
-      <div id="inAR" style="display: none;">
+      <div id="inAR" style="height:110vh; margin-top:-20px; display: none;background:black">
         <div id="pose"></div>
-        <div id='cube' class="cube" style="display: none;">
+        <div id='cube' class="cube">
           <div class="cube__face cube__face--front">front</div>
           <div class="cube__face cube__face--back">back</div>
           <div class="cube__face cube__face--right">right</div>
@@ -138,7 +152,8 @@
 
       <div id="warning-zone"></div>
       <canvas crossorigin="anonymous" id="canvas" width=320 height=240 style="display:none"></canvas>
-      <img id='source' src="http://localhost:8081/video" style="position:fixed; bottom: 10px;transform: rotate(90deg); width: 100%; height: auto; display: block; margin: 0 auto;" />
+      <img id='source' src="http://localhost:8081/video"
+        style="position:fixed; bottom: 10px;transform: rotate(90deg); width: 100%; height: auto; display: block; margin: 0 auto;" />
 
     </header>
 
@@ -352,21 +367,27 @@
     }
 
     var framen = 0;
-    
+
     function onXRFrame(t, frame) {
       framen++;
       let session = frame.session;
       session.requestAnimationFrame(onXRFrame);
-      if(framen < 4){
-      gl.bindFramebuffer(gl.FRAMEBUFFER, session.renderState.baseLayer.framebuffer);
-      const width = session.renderState.baseLayer.framebufferWidth;
-      const height = session.renderState.baseLayer.framebufferHeight;
-      gl.enable(gl.SCISSOR_TEST);
-      gl.scissor(0, 0, width, height);
 
-      //  black bg
-      gl.clearColor(0, 0, 0, 1);
-      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      if (framen < 4) {
+        gl.bindFramebuffer(gl.FRAMEBUFFER, session.renderState.baseLayer.framebuffer);
+
+        // Update the clear color so that we can observe the color in the
+        // headset changing over time. Use a scissor rectangle to keep the AR
+        // scene visible.
+        const width = session.renderState.baseLayer.framebufferWidth;
+        const height = session.renderState.baseLayer.framebufferHeight;
+        gl.enable(gl.SCISSOR_TEST);
+        gl.scissor(0, 0, width, height);
+
+        //  black bg
+        gl.clearColor(0, 0, 0, 1);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
       }
 
       let pose = frame.getViewerPose(xrRefSpace);
@@ -392,6 +413,9 @@
         p.x.toFixed(3) + ", " + p.y.toFixed(3) + ", " + p.z.toFixed(3) + "<br> " +
         "Orientation: <br>" + q.x.toFixed(3) + ", " + q.y.toFixed(3) + ", " + q.z.toFixed(3) + ", " + q.w.toFixed(3);
 
+        var q1 = new Quaternion(q.w, q.x, q.y, q.z);
+      document.getElementById("cube").style.transform = 'translateZ(-100px) matrix3d(' + q1.toMatrix4() + ')';
+
       var out = {
         sensorPosition: {
           /*
@@ -411,10 +435,14 @@
       }
 
       ws.send(JSON.stringify(out));
+
+            var q1 = new Quaternion(q.w, q.x, q.y, q.z);
+      document.getElementById("cube").style.transform = 'translateZ(-100px) matrix3d(' + q1.toMatrix4() + ')';
+
     }
 
 
-    
+
 
     initXR();
     startWebSocket();
