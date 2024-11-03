@@ -472,7 +472,7 @@
   });
   function updateLevelInfo() {
     console.log(`Battery level: ${battery.level * 100}%`);
-    batLevel = battery.level * 100;
+    batLevel = battery.level;
   }
 
   battery.addEventListener("chargingtimechange", () => {
