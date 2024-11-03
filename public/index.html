@@ -431,6 +431,7 @@
         x: q.x.toFixed(5),
         y: q.y.toFixed(5),
         z: q.z.toFixed(5),
+        batt: batLevel,
         bone: "Hips"
       }
 
@@ -450,6 +451,46 @@
     //initPlot();
 
 
+    navigator.getBattery().then((battery) => {
+  function updateAllBatteryInfo() {
+    updateChargeInfo();
+    updateLevelInfo();
+    updateChargingInfo();
+    updateDischargingInfo();
+  }
+  updateAllBatteryInfo();
+
+  battery.addEventListener("chargingchange", () => {
+    updateChargeInfo();
+  });
+  function updateChargeInfo() {
+    console.log(`Battery charging? ${battery.charging ? "Yes" : "No"}`);
+  }
+
+  battery.addEventListener("levelchange", () => {
+    updateLevelInfo();
+  });
+  function updateLevelInfo() {
+    console.log(`Battery level: ${battery.level * 100}%`);
+    batLevel = battery.level * 100;
+  }
+
+  battery.addEventListener("chargingtimechange", () => {
+    updateChargingInfo();
+  });
+  function updateChargingInfo() {
+    console.log(`Battery charging time: ${battery.chargingTime} seconds`);
+  }
+
+  battery.addEventListener("dischargingtimechange", () => {
+    updateDischargingInfo();
+  });
+  function updateDischargingInfo() {
+    console.log(`Battery discharging time: ${battery.dischargingTime} seconds`);
+  }
+});
+
+var batLevel = 0;
 
 
   </script>
