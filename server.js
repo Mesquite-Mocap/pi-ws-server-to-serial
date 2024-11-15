@@ -8,6 +8,7 @@ var port = new SerialPort('/dev/ttyGS0', { //update your port
 });
 
 
+
 function write(str) {
   port.write(str + '\n', function (err) { // the string being pushed
     if (err) {
@@ -15,6 +16,16 @@ function write(str) {
     }
   })
 }
+
+// read serial data
+port.on('readable', function () {
+  const data = port.read();
+  if (data) {
+      console.log('Data:', data.toString());
+  } else {
+      console.error('Failed to read data from port');
+  }  
+});
 
 const WebSocket = require('ws')
 
