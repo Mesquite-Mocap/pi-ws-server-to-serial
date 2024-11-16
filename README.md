@@ -46,7 +46,7 @@ hash -r
 in the rpi shell.
 
 
-b. Make sure **serial interface** and **auto-logon for root user** are enabled (use `sudo raspi-config`; restart to apply settings)
+b. Make sure **serial interface** and <strike>auto-logon for root user</strike> are enabled (use `sudo raspi-config`; restart to apply settings)
 
 
 
@@ -86,5 +86,5 @@ cd /home/mesquite/pi-ws-server-to-serial
 sudo node server.js
 
 ```
-to your `~/.bashrc`.
+to your `/etc/rc.local`.
 
