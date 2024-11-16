@@ -10,7 +10,7 @@ Get a
 
 ### STEP 1: Installing Node.js and other necessary software on Pi Zero W
 
-a. Flash a **terminal only** image of raspberry pi using [Pi OS Imager](https://www.raspberrypi.com/software/) (this guide is for bullsye 32 bit lite):
+a. Flash a **terminal only** image of raspberry pi using [Pi OS Imager](https://www.raspberrypi.com/software/) (this guide is for bullssye 32 bit lite):
 
 <img src="rpiopts.jpg" width=400 style="display:block;margin:auto">
 
