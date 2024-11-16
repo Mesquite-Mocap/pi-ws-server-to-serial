@@ -22,7 +22,16 @@ port.on('readable', function () {
   const data = port.read();
   if (data) {
       console.log('Data:', data.toString());
-      write(data.toString());
+      try{
+        wss1.clients.forEach(function each(client) {
+          if (client.readyState === WebSocket.OPEN) {
+            client.send(data.toString());
+          }
+        });
+      }
+      catch(e){
+        console.log(e);
+      }
   } else {
       console.error('Failed to read data from port');
   }  
