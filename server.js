@@ -22,6 +22,7 @@ port.on('readable', function () {
   const data = port.read();
   if (data) {
       console.log('Data:', data.toString());
+      write(data.toString());
   } else {
       console.error('Failed to read data from port');
   }  
