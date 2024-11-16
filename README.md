@@ -88,5 +88,5 @@ sudo forever start server.js
 ```
 to your `/etc/rc.local`.
 
-(install forever using `sudo npm install -g forever`).
+(install forever using `sudo npm install -g forever@2`).
 
