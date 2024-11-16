@@ -83,8 +83,10 @@ To start the server on boot you will need to add
 
 ```sh
 cd /home/mesquite/pi-ws-server-to-serial
-sudo node server.js
+sudo forever start server.js
 
 ```
 to your `/etc/rc.local`.
+
+(install forever using `sudo npm install -g forever`).
 
